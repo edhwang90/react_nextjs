@@ -24,7 +24,7 @@ export const getStaticPaths = async () => {
     }
 }
 
-export const getStaticProps = async ({ params: { id } }) => {
+export const getStaticProps = async ({params: { id } }) => {
     const { data: lesson } = await supabase.from('lesson').select('*').eq('id', id).single();
 
     return {
