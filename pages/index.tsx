@@ -1,12 +1,14 @@
-import type { NextPage } from 'next';
+import type { NextPage, GetStaticProps } from 'next';
 import Link from 'next/link';
 
 import { supabase } from '../utils/supabase';
 import { Lesson } from '../utils/types';
 
-const Home: NextPage = (props: any) => {
-  const { lessons }: {lessons: Lesson[]} = props;
+interface HomePageProps {
+  lessons: Lesson[]
+}
 
+const Home: NextPage<HomePageProps> = ({lessons}) => {
   return (
     <div className="w-full max-w-3xl mx-auto my-16 px-2">
       {lessons.map((lesson: Lesson) => (
@@ -20,8 +22,8 @@ const Home: NextPage = (props: any) => {
   )
 }
 
-export const getStaticProps = async () => {
-  const { data: lessons } = await supabase.from('lesson').select('*');
+export const getStaticProps: GetStaticProps = async () => {
+  const { data: lessons } = await supabase.from<Lesson>('lesson').select('*');
 
   return {
     props: {
