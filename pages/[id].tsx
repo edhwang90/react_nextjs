@@ -11,6 +11,10 @@ interface Params extends ParsedUrlQuery {
   id: string
 }
 
+interface Paths {
+  params: Params
+}
+
 const LessonDetails: NextPage<LessonDetailsProps> = ({lesson}) => {
   return (
     <div>
@@ -23,7 +27,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const res = await supabase.from<Lesson>('lesson').select('id');
   const lessons = (await res.data) as Lesson[];
 
-  const paths = lessons?.map(({id}: {id: number}) => ({
+  const paths: Paths[] = lessons?.map(({id}: {id: number}) => ({
     params: {
       id: id.toString()
     }
