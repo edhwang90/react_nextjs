@@ -19,16 +19,16 @@ const LessonDetails: NextPage<LessonDetailsProps> = ({lesson}) => {
   )  
 }
 
-export const getStaticPaths = async () => {
-
-  const { data: lessons } = await supabase.from<Lesson>('lesson').select('id');
+export const getStaticPaths: GetStaticPaths = async () => {
+  const res = await supabase.from<Lesson>('lesson').select('id');
+  const lessons = (await res.data) as Lesson[];
 
   const paths = lessons?.map(({id}: {id: number}) => ({
     params: {
       id: id.toString()
     }
   }));
-  
+
   return {
     paths,
     fallback: false

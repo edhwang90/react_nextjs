@@ -23,7 +23,8 @@ const Home: NextPage<HomePageProps> = ({lessons}) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data: lessons } = await supabase.from<Lesson>('lesson').select('*');
+  const res = await supabase.from<Lesson>('lesson').select('*');
+  const lessons = (await res.data) as Lesson[];
 
   return {
     props: {
