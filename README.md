@@ -7,4 +7,6 @@ npm run build
 
 npm start - runs production
 
+ngrok http 3000 - temporary public url
+
 # Node version: 16.15.1
