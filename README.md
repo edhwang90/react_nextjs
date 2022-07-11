@@ -1,3 +1,6 @@
+# Note
+In progress learning environment for: TypeScript, Supabase.
+
 # Dev Environment
 
 # Start Up
